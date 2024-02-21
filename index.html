@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket ScoreCard</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #parent{
+            width: 100%;
+            margin: auto;
+            background-color: aqua;
+            height: 100vh;
+            padding-top: 7em;
+        }
+        #ScoreCard{
+            text-align: center;
+            /* padding-top: 2em; */
+            font-size: 2em;
+            background-color: rgb(11, 11, 159);
+            color: #f3f3f3;
+            border-radius: 2em;
+            width: 7em;
+            margin-left: auto;
+            margin-right: auto;
+            /* margin-top: 40px; */
+        }
+        #buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        #buttons button{
+            border: none;
+            padding: .5em;
+            border-radius: 10px;
+        }
+
+        #buttons :hover{
+            cursor: pointer;
+        }
+        p{
+            text-align: center;
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            font-weight: 700;
+            background-color: rgb(31, 167, 212);
+            width: 5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 2em;
+            color: #f3f3f3;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+    // Code goes here
+    function CricketScoreboard(){
+        const[run, setRuns] = React.useState(0);
+        const[wicket, setWickets] = React.useState(0);
+
+        function DisplayRuns(value){
+            setRuns(run + value);
+        }
+
+        function DisplayWicket(){
+            let totalWickets = 10;
+
+            if(wicket < totalWickets){
+                setWickets(wicket + 1);
+            }else{
+                alert(`Pakistan is All out at: ${run}/${wicket}`);
+            }
+            
+        }
+
+        return (
+            <div id="parent">
+                <h3 id="ScoreCard">INDIA v PAK {run}/<span style={{color:'red'}}>{wicket}</span></h3>
+                <p>Over 19.2</p>
+                <div id="buttons">
+                    <button onClick={() => DisplayRuns(4)}>Increase runs by 4</button>
+                    <button onClick={() => DisplayRuns(8)}>Increase runs by 8</button>
+                    <button onClick={() => DisplayRuns(3)}>Increase runs by 3</button>
+                    <button onClick={() => DisplayWicket()}>Update Wicket</button>
+                </div>
+            </div>
+        );
+    }
+
+    let reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+    reactRoot.render(<CricketScoreboard/>);
+    </script>
+</html>
